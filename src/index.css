@@ -146,6 +146,13 @@ ul {
   display: inline;
 }
 
+.simple_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 section,
 li {
   display: inline;

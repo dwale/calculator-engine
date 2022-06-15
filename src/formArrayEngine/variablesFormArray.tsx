@@ -28,10 +28,7 @@ export const VariablesFields = ({
 
               <input
                 {...register(
-                  `formDetails.${nestIndex}.variables.${k}.variableName`,
-                  {
-                    required: true,
-                  }
+                  `formDetails.${nestIndex}.variables.${k}.variableName`
                 )}
                 style={{ marginRight: "25px" }}
               />
@@ -55,7 +52,7 @@ export const VariablesFields = ({
                   Choose variable type...
                 </option>
                 <option value={"amount"}>Amount</option>
-                <option value={"percantage"}>Percentage (%)</option>
+                <option value={"percentage"}>Percentage (%)</option>
               </select>
 
               <label>Notes</label>

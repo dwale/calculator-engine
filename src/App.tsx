@@ -22,6 +22,7 @@ const defaultValues = {
           calculationName: "",
           formula: "",
           notes: "",
+          testResult: 0,
         },
       ],
     },

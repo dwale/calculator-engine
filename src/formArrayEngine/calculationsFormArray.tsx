@@ -1,5 +1,11 @@
+import { useCallback, useEffect, useState } from "react";
 import { Control, FieldValues, useFieldArray } from "react-hook-form";
+import { formularParser } from "../formularParser";
 import { useFormStepNumber } from "../hooks/useFormStepNumber";
+const FormulaParser = require("hot-formula-parser").Parser;
+const SUPPORTED_FORMULAS = require("hot-formula-parser").SUPPORTED_FORMULAS;
+
+const parser = new FormulaParser();
 
 type NestedFieldProps = {
   control: Control<FieldValues, any>;
@@ -16,23 +22,38 @@ export const CalculationFields = ({
     name: `formDetails.${nestIndex}.calculations`,
   });
 
+  const formDetails = control._formValues.formDetails[0];
+
   const { stepNumber } = useFormStepNumber();
 
-  const testCalculation = (k: number) => {
-    console.log(k, "selected Calculation", control.getFieldState);
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({} as any), []);
+
+  const testCalculation = (calculatonIndex: number) => {
+    console.log(calculatonIndex, "selected Calculation", control._formValues);
+    formDetails.calculations[calculatonIndex].testResult = formularParser(
+      control._formValues,
+      calculatonIndex,
+      parser
+    );
+    parser.setVariable(
+      formDetails.calculations[calculatonIndex].calculationName,
+      formDetails.calculations[calculatonIndex].testResult
+    );
+    forceUpdate();
   };
 
   return (
     <div>
       {stepNumber === 3 &&
-        fields.map((item, k) => {
+        fields.map((item, calculatonIndex) => {
           return (
             <div key={item.id} style={{ marginLeft: 20 }}>
               <label>Calculation Name</label>
 
               <input
                 {...register(
-                  `formDetails.${nestIndex}.calculations.${k}.calculationName`,
+                  `formDetails.${nestIndex}.calculations.${calculatonIndex}.calculationName`,
                   {
                     required: true,
                   }
@@ -42,27 +63,45 @@ export const CalculationFields = ({
 
               <label>Formula</label>
 
-              <input
-                type={"text"}
-                {...register(
-                  `formDetails.${nestIndex}.calculations.${k}.formula`
-                )}
-              />
+              <div>
+                <span>
+                  <div className="simple_row">
+                    <input
+                      type={"text"}
+                      {...register(
+                        `formDetails.${nestIndex}.calculations.${calculatonIndex}.formula`
+                      )}
+                    />
+                    <button
+                      type="button"
+                      style={{ marginLeft: "10px" }}
+                      onClick={() => testCalculation(calculatonIndex)}
+                    >
+                      Test
+                    </button>
+                  </div>
+
+                  {formDetails.calculations[calculatonIndex] && (
+                    <p>
+                      Result:{" "}
+                      {formDetails.calculations[
+                        calculatonIndex
+                      ].testResult.toLocaleString()}
+                    </p>
+                  )}
+                </span>
+              </div>
 
               <label>Notes</label>
 
               <input
                 {...register(
-                  `formDetails.${nestIndex}.calculations.${k}.notes`
+                  `formDetails.${nestIndex}.calculations.${calculatonIndex}.notes`
                 )}
               />
 
-              <button type="button" onClick={() => remove(k)}>
+              <button type="button" onClick={() => remove(calculatonIndex)}>
                 Delete
-              </button>
-
-              <button type="button" onClick={() => testCalculation(k)}>
-                Test
               </button>
             </div>
           );

@@ -10,7 +10,6 @@ export const FieldArray = ({ control, register }: any) => {
   });
 
   const { stepNumber } = useFormStepNumber();
-  console.log(stepNumber, "stepNumber in FIeldArray");
 
   return (
     <>
