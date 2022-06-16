@@ -30,7 +30,7 @@ export const CalculationFields = ({
   const forceUpdate = useCallback(() => updateState({} as any), []);
 
   const testCalculation = (calculatonIndex: number) => {
-    debugger
+    debugger;
     console.log(calculatonIndex, "selected Calculation", control._formValues);
     formDetails.calculations[calculatonIndex].testResult = formularParser(
       control._formValues,
@@ -101,7 +101,11 @@ export const CalculationFields = ({
                 )}
               />
 
-              <button type="button" onClick={() => remove(calculatonIndex)}>
+              <button
+                type="button"
+                onClick={() => remove(calculatonIndex)}
+                className="mt-4"
+              >
                 Delete
               </button>
             </div>
@@ -109,7 +113,11 @@ export const CalculationFields = ({
         })}
 
       {stepNumber === 3 && (
-        <button type="button" onClick={() => append({})}>
+        <button
+          type="button"
+          onClick={() => append({})}
+          style={{ marginTop: "3rem" }}
+        >
           Add More Calculations
         </button>
       )}
