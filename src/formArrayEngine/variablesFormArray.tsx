@@ -23,8 +23,8 @@ export const VariablesFields = ({
       {stepNumber === 2 &&
         fields.map((item, k) => {
           return (
-            <>
-              <div key={item.id} className="row ms-4">
+            <div key={item.id}>
+              <div className="row ms-4">
                 <div className="col">
                   <label className="form-label">Variable Name</label>
                   <input
@@ -90,7 +90,7 @@ export const VariablesFields = ({
                   </button>
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
 
