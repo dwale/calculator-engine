@@ -17,7 +17,7 @@ export const FieldArray = ({ control, register }: any) => {
         {fields.map((item, index) => {
           return (
             <li key={item.id}>
-              {stepNumber === 1 && (
+              {(stepNumber === 1 || stepNumber === 4) && (
                 <>
                   <label>Territory</label>
                   <select
@@ -44,11 +44,11 @@ export const FieldArray = ({ control, register }: any) => {
                 </>
               )}
 
-              {stepNumber === 2 && (
+              {(stepNumber === 2 || stepNumber === 4) && (
                 <VariablesFields nestIndex={index} {...{ control, register }} />
               )}
 
-              {stepNumber === 3 && (
+              {(stepNumber === 3 || stepNumber === 4) && (
                 <CalculationFields
                   nestIndex={index}
                   {...{ control, register }}
