@@ -30,6 +30,7 @@ export const CalculationFields = ({
   const forceUpdate = useCallback(() => updateState({} as any), []);
 
   const testCalculation = (calculatonIndex: number) => {
+    debugger
     console.log(calculatonIndex, "selected Calculation", control._formValues);
     formDetails.calculations[calculatonIndex].testResult = formularParser(
       control._formValues,
@@ -86,7 +87,7 @@ export const CalculationFields = ({
                       Result:{" "}
                       {formDetails.calculations[
                         calculatonIndex
-                      ].testResult.toLocaleString()}
+                      ].testResult?.toLocaleString()}
                     </p>
                   )}
                 </span>
