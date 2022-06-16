@@ -59,7 +59,7 @@ export const VariablesFields = ({
                     {...register(
                       `formDetails.${nestIndex}.variables.${k}.variableType`
                     )}
-                    class="form-select"
+                    className="form-select"
                   >
                     <option value="default" disabled>
                       Choose variable type...
