@@ -144,7 +144,7 @@ function App() {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setStepNumber(3)}>
+            <Button variant="secondary" onClick={() => setStepNumber(4)}>
               Cancel
             </Button>
             <Button variant="primary" onClick={() => setStepNumber(6)}>
