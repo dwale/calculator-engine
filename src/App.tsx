@@ -47,11 +47,9 @@ function App() {
   const [data, setData] = useState<any>();
 
   const onSubmit = (formData: any) => {
-    if (stepNumber < 4) {
+    if (stepNumber < 5) {
       setStepNumber(stepNumber + 1);
       setData(formData);
-    } else if (stepNumber === 4) {
-      //show modal
     }
   };
 
@@ -78,8 +76,7 @@ function App() {
             }}
           />
         )}
-
-        {stepNumber === 4 && (
+        {(stepNumber === 4 || stepNumber === 5) && (
           <div className="container">
             <div className="row">
               <div className="col">
@@ -136,27 +133,31 @@ function App() {
             ))}
           </div>
         )}
-        {stepNumber === 5 && (
-          <Modal.Dialog>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
 
-            <Modal.Body>
-              <p>
-                By saving this data it will be available on the OmniCalculator,
-                so can other use it. If you are sure about the results of your
-                calculations, you can proceed by saving
-              </p>
-            </Modal.Body>
-
-            <Modal.Footer>
-              <Button variant="secondary">Cancel</Button>
-              <Button variant="primary">Save</Button>
-            </Modal.Footer>
-          </Modal.Dialog>
+        <Modal show={Boolean(stepNumber === 5)} centered size="sm">
+          {/* onHide={handleClose} */}
+          <Modal.Body>
+            <p style={{ color: "black" }}>
+              By saving this data it will be available on the OmniCalculator, so
+              can other use it. If you are sure about the results of your
+              calculations, you can proceed by saving.
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setStepNumber(3)}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={() => setStepNumber(6)}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        {stepNumber === 6 && (
+          <p className="mt-5 text-center">
+            Data has been saved on the OmniCalculator.
+          </p>
         )}
-        <input type="submit" value={"Continue"} />
+        {stepNumber < 6 && <input type="submit" value={"Continue"} />}
       </form>
     </div>
   );
