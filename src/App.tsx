@@ -30,7 +30,7 @@ const defaultValues = {
 };
 
 function App() {
-  const { control, register, handleSubmit, getValues, reset, setValue } =
+  const { control, register, handleSubmit, getValues, reset, setValue, formState: { errors } } =
     useForm({
       defaultValues,
     });
@@ -42,12 +42,12 @@ function App() {
 
     console.log("data", data, "step", stepNumber);
   };
-
+  console.log(errors);
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>OmniAtlas Calculator Engine</h1>
-
+        {errors && Array.isArray(errors.formDetails) && <span style={{color: "red"}}>{errors.formDetails[0].variables?.map(variable => variable?.variableName?.message)}</span>}
         <FieldArray
           {...{
             control,

@@ -17,7 +17,7 @@ export const VariablesFields = ({
   });
 
   const { stepNumber } = useFormStepNumber();
-
+  
   return (
     <div>
       {stepNumber === 2 &&
@@ -28,11 +28,17 @@ export const VariablesFields = ({
 
               <input
                 {...register(
-                  `formDetails.${nestIndex}.variables.${k}.variableName`
+                  `formDetails.${nestIndex}.variables.${k}.variableName`,
+                  {
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "numbers are not allowed"
+                    }
+                  }
                 )}
                 style={{ marginRight: "25px" }}
               />
-
+              
               <label>Variable Value</label>
 
               <input
