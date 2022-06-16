@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Control, FieldValues, useFieldArray } from "react-hook-form";
 import { formularParser } from "../formularParser";
 import { useFormStepNumber } from "../hooks/useFormStepNumber";
 const FormulaParser = require("hot-formula-parser").Parser;
-const SUPPORTED_FORMULAS = require("hot-formula-parser").SUPPORTED_FORMULAS;
 
 const parser = new FormulaParser();
 
