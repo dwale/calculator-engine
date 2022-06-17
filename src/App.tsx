@@ -110,6 +110,15 @@ function App() {
               </p>
             )}
             {stepNumber < 6 && <input type="submit" value={"Continue"} />}
+            {stepNumber > 1 && stepNumber < 6 && (
+              <Button
+                variant="secondary"
+                onClick={() => setStepNumber(stepNumber - 1)}
+                className="mt-3"
+              >
+                back
+              </Button>
+            )}
           </form>
         </Col>
       </Row>
