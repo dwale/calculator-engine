@@ -59,7 +59,7 @@ function App() {
 
   console.log("data", data, "step", stepNumber);
   return (
-    <Container style={{ padding: "10rem 0 4rem" }}>
+    <Container style={{ padding: "7rem 0 4rem" }}>
       <Row>
         <Col>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -86,10 +86,10 @@ function App() {
               <Recap data={data?.formDetails[0]} />
             )}
 
-            <Modal show={Boolean(stepNumber === 5)} centered size="sm">
+            <Modal show={Boolean(stepNumber === 5)} centered size="lg">
               {/* onHide={handleClose} */}
               <Modal.Body>
-                <p style={{ color: "black" }}>
+                <p className="text-center" style={{ color: "black" }}>
                   By saving this data it will be available on the
                   OmniCalculator, so can other use it. If you are sure about the
                   results of your calculations, you can proceed by saving.
