@@ -86,7 +86,7 @@ export const CalculationFields = ({
                       Result:{" "}
                       {formDetails.calculations[
                         calculatonIndex
-                      ].testResult.toLocaleString()}
+                      ]?.testResult?.toLocaleString()}
                     </p>
                   )}
                 </span>

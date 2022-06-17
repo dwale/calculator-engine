@@ -23,7 +23,7 @@ export const formularParser = (
     if (variables.variableType === "percentage") {
       variables.variableValue = variables.variableValue / 100;
     }
-    parser.setVariable(sanitisedVariableName, variables.variableValue);
+    parser.setVariable(sanitisedVariableName, Number(variables.variableValue));
   });
 
   console.log(
