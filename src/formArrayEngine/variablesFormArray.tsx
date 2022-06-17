@@ -1,5 +1,8 @@
 import { Control, FieldValues, useFieldArray } from "react-hook-form";
 import { useFormStepNumber } from "../hooks/useFormStepNumber";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 type NestedFieldProps = {
   control: Control<FieldValues, any>;
@@ -19,13 +22,13 @@ export const VariablesFields = ({
   const { stepNumber } = useFormStepNumber();
 
   return (
-    <div className="container-lg">
+    <>
       {stepNumber === 2 &&
         fields.map((item, k) => {
           return (
-            <div key={item.id}>
-              <div className="row ms-4">
-                <div className="col">
+            <Container key={item.id}>
+              <Row>
+                <Col>
                   <label className="form-label">Variable Name</label>
                   <input
                     {...register(
@@ -40,8 +43,8 @@ export const VariablesFields = ({
                     style={{ marginRight: "25px" }}
                     className="form-control"
                   />
-                </div>
-                <div className="col">
+                </Col>
+                <Col>
                   <label className="form-label">Variable Value</label>
 
                   <input
@@ -51,8 +54,8 @@ export const VariablesFields = ({
                     )}
                     className="form-control"
                   />
-                </div>
-                <div className="col">
+                </Col>
+                <Col>
                   <label className="form-label">Variable Type</label>
 
                   <select
@@ -67,8 +70,8 @@ export const VariablesFields = ({
                     <option value={"amount"}>Amount</option>
                     <option value={"percentage"}>Percentage (%)</option>
                   </select>
-                </div>
-                <div className="col">
+                </Col>
+                <Col>
                   <label className="form-label">Notes</label>
 
                   <input
@@ -77,20 +80,18 @@ export const VariablesFields = ({
                     )}
                     className="form-control"
                   />
-                </div>
-              </div>
-              <div className="row ms-4 mt-4">
-                <div className="col">
+                </Col>
+                <Col>
                   <button
                     type="button"
                     onClick={() => remove(k)}
-                    className="align-baseline"
+                    className="mt-5"
                   >
                     Delete
                   </button>
-                </div>
-              </div>
-            </div>
+                </Col>
+              </Row>
+            </Container>
           );
         })}
 
@@ -105,6 +106,6 @@ export const VariablesFields = ({
       )}
 
       <hr />
-    </div>
+    </>
   );
 };
