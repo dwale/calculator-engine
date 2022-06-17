@@ -21,6 +21,7 @@ const defaultValues = {
           variableValue: "",
           variableType: "default",
           notes: "",
+          parsedVariableValue: 0,
         },
       ],
       calculations: [

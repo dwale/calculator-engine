@@ -39,6 +39,7 @@ export const FieldArray = ({ control, register }: any) => {
 
                 <input
                   type={"number"}
+                  step={"any"}
                   required
                   min={1}
                   {...register(`formDetails.${index}.monthlySalary`)}

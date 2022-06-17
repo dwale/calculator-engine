@@ -49,6 +49,7 @@ export const VariablesFields = ({
 
                   <input
                     type={"number"}
+                    step={"any"}
                     {...register(
                       `formDetails.${nestIndex}.variables.${k}.variableValue`
                     )}

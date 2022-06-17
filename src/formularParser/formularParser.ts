@@ -4,6 +4,7 @@ type VariableData = {
   variableName: string;
   variableType: string;
   variableValue: number;
+  parsedVariableValue: number;
   notes: string;
 };
 export const formularParser = (
@@ -12,12 +13,24 @@ export const formularParser = (
   parser: any
 ): number => {
   parser.setVariable("salary", formDetails.formDetails[0].monthlySalary);
+  console.log(formDetails);
   formDetails.formDetails[0]?.variables?.forEach((variables: VariableData) => {
     const sanitizedVariableNames = variables.variableName.replaceAll(" ", "_"); //white space not supported in variable names
-    if (variables.variableType === "percentage") {
-      variables.variableValue = variables.variableValue / 100;
+    console.log(variables);
+
+    if (
+      variables.variableType === "percentage" &&
+      !!variables.parsedVariableValue
+    ) {
+      variables.parsedVariableValue = Number(variables.variableValue) / 100;
+      console.log("Im a percent");
     }
-    parser.setVariable(sanitizedVariableNames, variables.variableValue);
+    parser.setVariable(
+      sanitizedVariableNames,
+      variables.variableType === "percentage"
+        ? variables.parsedVariableValue
+        : variables.variableValue
+    );
   });
 
   return parser.parse(
