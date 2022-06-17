@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Recap from "./Recap";
 
 const defaultValues = {
   formDetails: [
@@ -58,17 +59,17 @@ function App() {
 
   console.log("data", data, "step", stepNumber);
   return (
-    <Container style={{ paddingTop: "10rem" }}>
+    <Container style={{ padding: "10rem 0 4rem" }}>
       <Row>
         <Col>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1>OmniAtlas Calculator Engine</h1>
             {errors && Array.isArray(errors.formDetails) && (
-              <span style={{ color: "red" }}>
+              <p className="text-danger">
                 {errors.formDetails[0].variables?.map(
                   (variable) => variable?.variableName?.message
                 )}
-              </span>
+              </p>
             )}
             {stepNumber < 4 && (
               <FieldArray
@@ -82,64 +83,7 @@ function App() {
               />
             )}
             {(stepNumber === 4 || stepNumber === 5) && (
-              <div className="container">
-                <div className="row">
-                  <div className="col">
-                    <h2>Recap</h2>
-                  </div>
-                </div>
-                <div className="row mb-4">
-                  <div className="col">
-                    <p>
-                      salary: {data?.formDetails[0].monthlySalary}
-                      {`(${data?.formDetails[0].territory})`}
-                    </p>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <h3>Variables</h3>
-                  </div>
-                </div>
-                {data?.formDetails[0].variables?.map((variable: any) => (
-                  <div className="row mb-4">
-                    <div className="col">
-                      <p>{variable.variableName}</p>
-                    </div>
-                    <div className="col">
-                      <p>{variable.variableType}</p>
-                    </div>
-                    <div className="col">
-                      <p>{variable.variableValue}</p>
-                    </div>
-                    <div className="col">
-                      <p>{variable.notes}</p>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="row">
-                  <div className="col">
-                    <h3>Calculated costs</h3>
-                  </div>
-                </div>
-                {data?.formDetails[0].calculations?.map((calculation: any) => (
-                  <div className="row">
-                    <div className="col">
-                      <p>{calculation.calculationName}</p>
-                    </div>
-                    <div className="col">
-                      <p>{calculation.formula}</p>
-                    </div>
-                    <div className="col">
-                      <p>{calculation.testResult}</p>
-                    </div>
-                    <div className="col">
-                      <p>{calculation.notes}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <Recap data={data?.formDetails[0]} />
             )}
 
             <Modal show={Boolean(stepNumber === 5)} centered size="sm">
