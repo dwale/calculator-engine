@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Control, FieldValues, useFieldArray } from "react-hook-form";
 import { formularParser } from "../formularParser";
 import { useFormStepNumber } from "../hooks/useFormStepNumber";
 const FormulaParser = require("hot-formula-parser").Parser;
-const SUPPORTED_FORMULAS = require("hot-formula-parser").SUPPORTED_FORMULAS;
 
 const parser = new FormulaParser();
 
@@ -86,7 +85,11 @@ export const CalculationFields = ({
                       Result:{" "}
                       {formDetails.calculations[
                         calculatonIndex
+<<<<<<< HEAD
                       ]?.testResult?.toLocaleString()}
+=======
+                      ].testResult?.toLocaleString()}
+>>>>>>> 800d40fd866224e578b2a9774dea1cb384bf0ecc
                     </p>
                   )}
                 </span>
@@ -100,7 +103,11 @@ export const CalculationFields = ({
                 )}
               />
 
-              <button type="button" onClick={() => remove(calculatonIndex)}>
+              <button
+                type="button"
+                onClick={() => remove(calculatonIndex)}
+                className="mt-4"
+              >
                 Delete
               </button>
             </div>
@@ -108,7 +115,11 @@ export const CalculationFields = ({
         })}
 
       {stepNumber === 3 && (
-        <button type="button" onClick={() => append({})}>
+        <button
+          type="button"
+          onClick={() => append({})}
+          style={{ marginTop: "3rem" }}
+        >
           Add More Calculations
         </button>
       )}

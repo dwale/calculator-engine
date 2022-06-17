@@ -1,6 +1,4 @@
 import { FieldValues } from "react-hook-form";
-const FormulaParser = require("hot-formula-parser").Parser;
-const SUPPORTED_FORMULAS = require("hot-formula-parser").SUPPORTED_FORMULAS;
 
 type VariableData = {
   variableName: string;
@@ -13,24 +11,18 @@ export const formularParser = (
   calculationIndex: number,
   parser: any
 ): number => {
-  //   const parser = new FormulaParser();
-  console.log(formDetails.formDetails);
-
   parser.setVariable("salary", formDetails.formDetails[0].monthlySalary);
   formDetails.formDetails[0]?.variables?.forEach((variables: VariableData) => {
-    const sanitisedVariableName = variables.variableName.replaceAll(" ", "_"); //white space not supported in variable names
-    console.log(sanitisedVariableName, "sanitisedVariableName");
+    const sanitizedVariableNames = variables.variableName.replaceAll(" ", "_"); //white space not supported in variable names
     if (variables.variableType === "percentage") {
       variables.variableValue = variables.variableValue / 100;
     }
+<<<<<<< HEAD
     parser.setVariable(sanitisedVariableName, Number(variables.variableValue));
+=======
+    parser.setVariable(sanitizedVariableNames, variables.variableValue);
+>>>>>>> 800d40fd866224e578b2a9774dea1cb384bf0ecc
   });
-
-  console.log(
-    parser.parse(
-      formDetails.formDetails[0].calculations[calculationIndex].formula
-    )
-  );
 
   return parser.parse(
     formDetails.formDetails[0].calculations[calculationIndex].formula

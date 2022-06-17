@@ -1,5 +1,8 @@
 import { Control, FieldValues, useFieldArray } from "react-hook-form";
 import { useFormStepNumber } from "../hooks/useFormStepNumber";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 type NestedFieldProps = {
   control: Control<FieldValues, any>;
@@ -19,62 +22,90 @@ export const VariablesFields = ({
   const { stepNumber } = useFormStepNumber();
 
   return (
-    <div>
+    <>
       {stepNumber === 2 &&
         fields.map((item, k) => {
           return (
-            <div key={item.id} style={{ marginLeft: 20 }}>
-              <label>Variable Name</label>
+            <Container key={item.id}>
+              <Row>
+                <Col>
+                  <label className="form-label">Variable Name</label>
+                  <input
+                    {...register(
+                      `formDetails.${nestIndex}.variables.${k}.variableName`,
+                      {
+                        pattern: {
+                          value: /^[A-Za-z]+$/i,
+                          message: "numbers are not allowed",
+                        },
+                      }
+                    )}
+                    style={{ marginRight: "25px" }}
+                    className="form-control"
+                  />
+                </Col>
+                <Col>
+                  <label className="form-label">Variable Value</label>
 
-              <input
-                {...register(
-                  `formDetails.${nestIndex}.variables.${k}.variableName`
-                )}
-                style={{ marginRight: "25px" }}
-              />
+                  <input
+                    type={"number"}
+                    {...register(
+                      `formDetails.${nestIndex}.variables.${k}.variableValue`
+                    )}
+                    className="form-control"
+                  />
+                </Col>
+                <Col>
+                  <label className="form-label">Variable Type</label>
 
-              <label>Variable Value</label>
+                  <select
+                    {...register(
+                      `formDetails.${nestIndex}.variables.${k}.variableType`
+                    )}
+                    className="form-select"
+                  >
+                    <option value="default" disabled>
+                      Choose variable type...
+                    </option>
+                    <option value={"amount"}>Amount</option>
+                    <option value={"percentage"}>Percentage (%)</option>
+                  </select>
+                </Col>
+                <Col>
+                  <label className="form-label">Notes</label>
 
-              <input
-                type={"number"}
-                {...register(
-                  `formDetails.${nestIndex}.variables.${k}.variableValue`
-                )}
-              />
-              <label>Variable Type</label>
-
-              <select
-                {...register(
-                  `formDetails.${nestIndex}.variables.${k}.variableType`
-                )}
-              >
-                <option value="default" disabled>
-                  Choose variable type...
-                </option>
-                <option value={"amount"}>Amount</option>
-                <option value={"percentage"}>Percentage (%)</option>
-              </select>
-
-              <label>Notes</label>
-
-              <input
-                {...register(`formDetails.${nestIndex}.variables.${k}.notes`)}
-              />
-
-              <button type="button" onClick={() => remove(k)}>
-                Delete variable
-              </button>
-            </div>
+                  <input
+                    {...register(
+                      `formDetails.${nestIndex}.variables.${k}.notes`
+                    )}
+                    className="form-control"
+                  />
+                </Col>
+                <Col>
+                  <button
+                    type="button"
+                    onClick={() => remove(k)}
+                    className="mt-5"
+                  >
+                    Delete
+                  </button>
+                </Col>
+              </Row>
+            </Container>
           );
         })}
 
       {stepNumber === 2 && (
-        <button type="button" onClick={() => append({})}>
-          Add More Variables
-        </button>
+        <div className="row">
+          <div className="col-6">
+            <button className="mt-5" type="button" onClick={() => append({})}>
+              Add More Variables
+            </button>
+          </div>
+        </div>
       )}
 
       <hr />
-    </div>
+    </>
   );
 };
