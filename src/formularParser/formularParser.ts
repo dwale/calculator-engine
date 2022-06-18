@@ -18,10 +18,7 @@ export const formularParser = (
     const sanitizedVariableNames = variables.variableName.replaceAll(" ", "_"); //white space not supported in variable names
     console.log(variables);
 
-    if (
-      variables.variableType === "percentage" &&
-      !!variables.parsedVariableValue
-    ) {
+    if (variables.variableType === "percentage") {
       variables.parsedVariableValue = Number(variables.variableValue) / 100;
       console.log("Im a percent");
     }
@@ -33,6 +30,11 @@ export const formularParser = (
     );
   });
 
+  console.log(
+    parser.parse(
+      formDetails.formDetails[0].calculations[calculationIndex].formula
+    )
+  );
   return parser.parse(
     formDetails.formDetails[0].calculations[calculationIndex].formula
   ).result;
