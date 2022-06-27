@@ -82,10 +82,10 @@ export const CalculationFields = ({
 
                   {formDetails.calculations[calculatonIndex] && (
                     <p>
-                      Result:{" "}
+                      Result: €
                       {formDetails.calculations[
                         calculatonIndex
-                      ].testResult?.toLocaleString()}
+                      ].testResult?.toFixed(2)}
                     </p>
                   )}
                 </span>

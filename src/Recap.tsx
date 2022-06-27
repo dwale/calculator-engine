@@ -1,9 +1,9 @@
 import Table from "react-bootstrap/Table";
 
 type RecapData = {
-  monthlySalary: string;
+  monthlySalary: number;
   territory: string;
-  variables: Array<any>;
+  variables: Record<string, number>[];
   calculations: Array<any>;
 };
 export default function Recap({ data }: { data: RecapData }) {
@@ -19,13 +19,19 @@ export default function Recap({ data }: { data: RecapData }) {
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
-                <th>salary</th>
-                <th>territory</th>
+                <th>Salary</th>
+                <th>Territory</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{data.monthlySalary}</td>
+                <td>
+                  {data.monthlySalary.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "EUR",
+                    maximumFractionDigits: 2,
+                  })}
+                </td>
                 <td>{data.territory}</td>
               </tr>
             </tbody>
@@ -39,10 +45,10 @@ export default function Recap({ data }: { data: RecapData }) {
             <thead>
               <tr>
                 <th>#</th>
-                <th>variable name</th>
-                <th>variable type</th>
-                <th>variable value</th>
-                <th>notes</th>
+                <th>Variable Name</th>
+                <th>Variable Type</th>
+                <th>Variable Value</th>
+                <th>Notes</th>
               </tr>
             </thead>
             <tbody>
@@ -51,7 +57,7 @@ export default function Recap({ data }: { data: RecapData }) {
                   <td>{index + 1}</td>
                   <td>{variable.variableName}</td>
                   <td>{variable.variableType}</td>
-                  <td>{variable.variableValue}</td>
+                  <td>€{Number(variable.variableValue).toFixed(2)}</td>
                   <td>{variable.notes}</td>
                 </tr>
               ))}
@@ -67,10 +73,10 @@ export default function Recap({ data }: { data: RecapData }) {
             <thead>
               <tr>
                 <th>#</th>
-                <th>calculation name</th>
-                <th>calculation type</th>
-                <th>calculation value</th>
-                <th>notes</th>
+                <th>Calculation Name</th>
+                <th>Formula</th>
+                <th>Calculation Value</th>
+                <th>Notes</th>
               </tr>
             </thead>
             <tbody>
@@ -79,7 +85,13 @@ export default function Recap({ data }: { data: RecapData }) {
                   <td>{index + 1}</td>
                   <td>{calculation.calculationName}</td>
                   <td>{calculation.formula}</td>
-                  <td>{calculation.testResult}</td>
+                  <td>
+                    {calculation.testResult.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "EUR",
+                      maximumFractionDigits: 2,
+                    })}
+                  </td>
                   <td>{calculation.notes}</td>
                 </tr>
               ))}
