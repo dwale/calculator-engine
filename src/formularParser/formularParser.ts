@@ -12,7 +12,11 @@ export const formularParser = (
   calculationIndex: number,
   parser: any
 ): number => {
-  parser.setVariable("salary", formDetails.formDetails[0].monthlySalary);
+  parser.setVariable(
+    "salary",
+    Number(formDetails.formDetails[0].monthlySalary)
+  );
+  console.log(parser.getVariable("salary"));
   console.log(formDetails);
   formDetails.formDetails[0]?.variables?.forEach((variables: VariableData) => {
     const sanitizedVariableNames = variables.variableName.replaceAll(" ", "_"); //white space not supported in variable names
@@ -29,6 +33,10 @@ export const formularParser = (
         : variables.variableValue
     );
   });
+
+  console.log(
+    formDetails.formDetails[0].calculations[calculationIndex].formula
+  );
 
   console.log(
     parser.parse(

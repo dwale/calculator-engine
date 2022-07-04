@@ -5,6 +5,7 @@ import { VariablesFields } from "./variablesFormArray";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { ALL_TERRITORIES } from "../constants/territories";
 
 export const FieldArray = ({ control, register }: any) => {
   const { fields } = useFieldArray({
@@ -29,11 +30,11 @@ export const FieldArray = ({ control, register }: any) => {
                   <option disabled value={"default"}>
                     Choose Territory...
                   </option>
-                  <option>Brazil</option>
-                  <option>France</option>
-                  <option>Nigeria</option>
-                  <option>United Kingdom</option>
-                  <option>Spain</option>
+                  {ALL_TERRITORIES.map((country) => (
+                    <option key={country.label} value={country.value}>
+                      {country.label}
+                    </option>
+                  ))}
                 </select>
 
                 <label>Monthly Salary</label>
