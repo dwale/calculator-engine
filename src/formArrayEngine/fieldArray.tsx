@@ -32,6 +32,7 @@ export const FieldArray = ({ control, register }: any) => {
                   <option>Brazil</option>
                   <option>France</option>
                   <option>Nigeria</option>
+                  <option>United Kingdom</option>
                   <option>Spain</option>
                 </select>
 

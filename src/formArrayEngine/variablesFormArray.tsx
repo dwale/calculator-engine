@@ -10,7 +10,7 @@ type NestedFieldProps = {
 } & { nestIndex: number };
 
 export const VariablesFields = ({
-  nestIndex,
+  nestIndex, 
   control,
   register,
 }: NestedFieldProps) => {
@@ -36,7 +36,7 @@ export const VariablesFields = ({
                       {
                         pattern: {
                           value: /^[A-Za-z]+$/i,
-                          message: "numbers are not allowed",
+                          message: "Avoid spaces and numbers in variable names",
                         },
                       }
                     )}

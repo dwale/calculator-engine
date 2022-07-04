@@ -60,7 +60,14 @@ function App() {
 
   console.log("data", data, "step", stepNumber);
   return (
-    <Container style={{ padding: "7rem 0 4rem" }}>
+    <Container
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
       <Row>
         <Col>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -110,16 +117,21 @@ function App() {
                 Data has been saved on the OmniCalculator.
               </p>
             )}
-            {stepNumber < 6 && <input type="submit" value={"Continue"} />}
-            {stepNumber > 1 && stepNumber < 6 && (
-              <Button
-                variant="secondary"
-                onClick={() => setStepNumber(stepNumber - 1)}
-                className="mt-3"
-              >
-                back
-              </Button>
-            )}
+
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              {stepNumber < 6 && (
+                <input type="submit" style={{ flex: 1 }} value="Continue" />
+              )}
+              {stepNumber > 1 && stepNumber < 6 && (
+                <Button
+                  variant="secondary"
+                  onClick={() => setStepNumber(stepNumber - 1)}
+                  style={{ flex: 1, marginLeft: "2rem" }}
+                >
+                  back
+                </Button>
+              )}
+            </div>
           </form>
         </Col>
       </Row>
