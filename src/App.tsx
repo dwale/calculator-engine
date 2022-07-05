@@ -72,7 +72,7 @@ function App() {
       <Row>
         <Col>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h1>OmniAtlas Calculator Engine -</h1>
+            <h1>OmniAtlas Calculator Engine</h1>
             {errors && Array.isArray(errors.formDetails) && (
               <p className="text-danger">
                 {errors.formDetails[0].variables?.map(
