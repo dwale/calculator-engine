@@ -34,16 +34,7 @@ export const formularParser = (
     );
   });
 
-  console.log(
-    formDetails.formDetails[0].calculations[calculationIndex].formula
-  );
-
-  console.log(
-    parser.parse(
-      formDetails.formDetails[0].calculations[calculationIndex].formula
-    )
-  );
   return parser.parse(
-    formDetails.formDetails[0].calculations[calculationIndex].formula
+    formDetails.formDetails[0].calculations[calculationIndex].formula.trim()
   ).result;
 };
